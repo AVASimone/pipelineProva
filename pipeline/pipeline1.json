@@ -1,6 +1,58 @@
 {
 	"name": "pipeline1",
 	"properties": {
+		"activities": [
+			{
+				"name": "Notebook1",
+				"type": "DatabricksNotebook",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "https://avanade-my.sharepoint.com/personal/simone_capizzi_avanade_com/_layouts/OneNote.aspx?id=%2Fpersonal%2Fsimone_capizzi_avanade_com%2FDocuments%2FSimone%20%40%20Avanade&wd=target%28Logic-App.one%7CDB64EE00-F039-48D4-B7BB-3D4C8913B86F%2FSenza%20titolo%7C7B8BE161-CEE8-4822-A172-7C0D3A1545D1%2F%29 onenote:https://avanade-my.sharepoint.com/personal/simone_capizzi_avanade_com/Documents/Simone%20@%20Avanade/Logic-App.one#section-id={DB64EE00-F039-48D4-B7BB-3D4C8913B86F}&page-id={7B8BE161-CEE8-4822-A172-7C0D3A1545D1}&end",
+					"baseParameters": {
+						"titolo": {
+							"value": "@pipeline().parameters.titolo",
+							"type": "Expression"
+						}
+					}
+				}
+			},
+			{
+				"name": "Notebook2",
+				"type": "DatabricksNotebook",
+				"dependsOn": [
+					{
+						"activity": "Notebook1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "https://avanade-my.sharepoint.com/personal/simone_capizzi_avanade_com/_layouts/OneNote.aspx?id=%2Fpersonal%2Fsimone_capizzi_avanade_com%2FDocuments%2FSimone%20%40%20Avanade&wd=target%28Logic-App.one%7CDB64EE00-F039-48D4-B7BB-3D4C8913B86F%2FSenza%20titolo%7C7B8BE161-CEE8-4822-A172-7C0D3A1545D1%2F%29 onenote:https://avanade-my.sharepoint.com/personal/simone_capizzi_avanade_com/Documents/Simone%20@%20Avanade/Logic-App.one#section-id={DB64EE00-F039-48D4-B7BB-3D4C8913B86F}&page-id={7B8BE161-CEE8-4822-A172-7C0D3A1545D1}&end"
+				}
+			}
+		],
+		"parameters": {
+			"titolo": {
+				"type": "string"
+			}
+		},
 		"annotations": []
 	}
 }
