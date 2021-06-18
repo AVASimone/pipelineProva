@@ -1,8 +1,15 @@
 {
 	"name": "Office365Table1",
 	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Office3651",
+			"type": "LinkedServiceReference"
+		},
 		"annotations": [],
 		"type": "Office365Table",
-		"schema": []
+		"schema": [],
+		"typeProperties": {
+			"tableName": "Prova1"
+		}
 	}
 }
