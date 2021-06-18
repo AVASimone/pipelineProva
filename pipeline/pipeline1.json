@@ -3,8 +3,8 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Notebook1",
-				"type": "DatabricksNotebook",
+				"name": "Copy data1",
+				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
 					"timeout": "7.00:00:00",
@@ -15,21 +15,44 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"notebookPath": "https://avanade-my.sharepoint.com/personal/simone_capizzi_avanade_com/_layouts/OneNote.aspx?id=%2Fpersonal%2Fsimone_capizzi_avanade_com%2FDocuments%2FSimone%20%40%20Avanade&wd=target%28Logic-App.one%7CDB64EE00-F039-48D4-B7BB-3D4C8913B86F%2FSenza%20titolo%7C7B8BE161-CEE8-4822-A172-7C0D3A1545D1%2F%29 onenote:https://avanade-my.sharepoint.com/personal/simone_capizzi_avanade_com/Documents/Simone%20@%20Avanade/Logic-App.one#section-id={DB64EE00-F039-48D4-B7BB-3D4C8913B86F}&page-id={7B8BE161-CEE8-4822-A172-7C0D3A1545D1}&end",
-					"baseParameters": {
-						"titolo": {
-							"value": "@pipeline().parameters.titolo",
-							"type": "Expression"
+					"source": {
+						"type": "ExcelSource",
+						"storeSettings": {
+							"type": "FileServerReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
 						}
+					},
+					"sink": {
+						"type": "JsonSink",
+						"storeSettings": {
+							"type": "FileServerWriteSettings"
+						},
+						"formatSettings": {
+							"type": "JsonWriteSettings"
+						}
+					},
+					"enableStaging": false
+				},
+				"inputs": [
+					{
+						"referenceName": "Excel1",
+						"type": "DatasetReference"
 					}
-				}
+				],
+				"outputs": [
+					{
+						"referenceName": "Json1",
+						"type": "DatasetReference"
+					}
+				]
 			},
 			{
-				"name": "Notebook2",
-				"type": "DatabricksNotebook",
+				"name": "Copy data2",
+				"type": "Copy",
 				"dependsOn": [
 					{
-						"activity": "Notebook1",
+						"activity": "Copy data1",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -44,13 +67,43 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"notebookPath": "https://avanade-my.sharepoint.com/personal/simone_capizzi_avanade_com/_layouts/OneNote.aspx?id=%2Fpersonal%2Fsimone_capizzi_avanade_com%2FDocuments%2FSimone%20%40%20Avanade&wd=target%28Logic-App.one%7CDB64EE00-F039-48D4-B7BB-3D4C8913B86F%2FSenza%20titolo%7C7B8BE161-CEE8-4822-A172-7C0D3A1545D1%2F%29 onenote:https://avanade-my.sharepoint.com/personal/simone_capizzi_avanade_com/Documents/Simone%20@%20Avanade/Logic-App.one#section-id={DB64EE00-F039-48D4-B7BB-3D4C8913B86F}&page-id={7B8BE161-CEE8-4822-A172-7C0D3A1545D1}&end"
-				}
+					"source": {
+						"type": "ExcelSource",
+						"storeSettings": {
+							"type": "FileServerReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						}
+					},
+					"sink": {
+						"type": "JsonSink",
+						"storeSettings": {
+							"type": "FileServerWriteSettings"
+						},
+						"formatSettings": {
+							"type": "JsonWriteSettings"
+						}
+					},
+					"enableStaging": false
+				},
+				"inputs": [
+					{
+						"referenceName": "Excel1",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "Json1",
+						"type": "DatasetReference"
+					}
+				]
 			}
 		],
 		"parameters": {
 			"titolo": {
-				"type": "string"
+				"type": "string",
+				"defaultValue": "prova"
 			}
 		},
 		"annotations": []
