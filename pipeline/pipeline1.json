@@ -16,7 +16,8 @@
 				"userProperties": [],
 				"typeProperties": {
 					"functionName": "FunctionApp20210222150240",
-					"method": "GET"
+					"method": "POST",
+					"body": "Prova pipeline"
 				},
 				"linkedServiceName": {
 					"referenceName": "AzureFunction1",
