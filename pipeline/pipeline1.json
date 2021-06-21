@@ -1,30 +1,20 @@
 {
 	"name": "pipeline1",
 	"properties": {
-		"activities": [
-			{
-				"name": "Azure Function1",
-				"type": "AzureFunctionActivity",
-				"dependsOn": [],
-				"policy": {
-					"timeout": "7.00:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"functionName": "FunctionApp20210222150240",
-					"method": "POST",
-					"body": "Prova pipeline"
-				},
-				"linkedServiceName": {
-					"referenceName": "AzureFunction1",
-					"type": "LinkedServiceReference"
-				}
+		"parameters": {
+			"userid": {
+				"type": "string"
+			},
+			"portfolioid": {
+				"type": "string"
 			}
-		],
+		},
+		"variables": {
+			"nome": {
+				"type": "String",
+				"defaultValue": "Prova"
+			}
+		},
 		"annotations": []
 	}
 }
